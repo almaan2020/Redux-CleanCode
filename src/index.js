@@ -26,5 +26,18 @@ store.dispatch(projectAdded({ name: "project 1" }));
 
 const unresolvedBugs = getUnresolvedBugs(store.getState());
 const userBugs = getBugsbyUser(1)(store.getState());   //currying
-
 console.log(unresolvedBugs, userBugs);
+
+
+store.dispatch((dispatch, getState) => {         //dispatching function
+    //call an API
+    //when the promise is resolved => dispatch()
+    dispatch({ type: "bugReceived", bugs: [1, 2, 3] });
+    console.log(getState());
+    //when the promise is rejected => dispatch()
+}
+);
+
+store.dispatch({ type: 'error', payload: { message: "An error occurred" } });
+
+
